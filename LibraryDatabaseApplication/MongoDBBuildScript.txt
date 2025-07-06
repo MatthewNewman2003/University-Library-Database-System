@@ -1,0 +1,214 @@
+//Connecting to database
+db = db.getSiblingDB("LibraryDatabase");
+print("You are now connected to: "+db.getName());
+
+//Dropping any collections that already exist
+db.StudentsCollection.drop();
+db.BooksCollection.drop();
+db.LoansCollection.drop();
+db.FinesCollection.drop();
+
+//Declaring sample books
+Book1 = {
+    "BookName" : "Advanced Operating Systems",
+    "Genre" : "Computing",
+    "Author" : "John Smith",
+    "CurrentlyAvailable" : "Yes"
+}
+
+Book2 = {
+    "BookName" : "The Theory of Everything",
+    "Genre" : "Physics",
+    "Author" : "Stephen Hawking",
+    "CurrentlyAvailable" : "Yes"
+}
+
+Book3 = {
+    "BookName" : "Macbeth",
+    "Genre" : "Tragedy",
+    "Author" : "William Shakespeare",
+    "CurrentlyAvailable" : "Yes"
+}
+
+Book4 = {
+    "BookName" : "Harry Potter and the Chamber of Secrets",
+    "Genre" : "Fantasy",
+    "Author" : "JK Rowling",
+    "CurrentlyAvailable" : "Yes"
+}
+
+Book5 = {
+    "BookName" : "MongoDB for Beginners",
+    "Genre" : "Computing",
+    "Author" : "Charles Mongo",
+    "CurrentlyAvailable" : "Yes"
+}
+
+//Inserting sample books into BooksCollection
+db.BooksCollection.insertOne(Book1);
+db.BooksCollection.insertOne(Book2);
+db.BooksCollection.insertOne(Book3);
+db.BooksCollection.insertOne(Book4);
+db.BooksCollection.insertOne(Book5);
+
+//Declaring sample students
+Student1 = {
+    "EmailAddress" : "s4100701@glos.ac.uk",
+    "FirstName" : "Matt",
+    "LastName" : "Newman",
+    "Password" : "matt123"
+}
+
+Student2 = {
+    "EmailAddress" : "user@example.com",
+    "FirstName" : "Example",
+    "LastName" : "User",
+    "Password" : "example123"
+}
+
+Student3 = {
+    "EmailAddress" : "abc@alphabet.com",
+    "FirstName" : "Alpha",
+    "LastName" : "Beta",
+    "Password" : "abc123"
+}
+
+//Inserting sample students into StudentsCollection
+db.StudentsCollection.insertOne(Student1);
+db.StudentsCollection.insertOne(Student2);
+db.StudentsCollection.insertOne(Student3);
+
+//Declaring sample loans
+Loan1 = {
+    "LoanName" : "TheoryOfEverythingAug2023",
+    "EmailAddress" : "abc@alphabet.com",
+    "BookName" : "The Theory of Everything",
+    "LoanDate" : new Date("2023-08-12"),
+    "DueDate" : new Date("2023-08-26"),
+    "ReturnDate" : new Date("2023-08-29"),
+    "ReturnedOnTime" : "No",
+    "FinePaid" : "Yes"
+}
+
+Loan2 = {
+    "LoanName" : "AdvancedOSSep2023",
+    "EmailAddress" : "abc@alphabet.com",
+    "BookName" : "Advanced Operating Systems",
+    "LoanDate" : new Date("2023-09-02"),
+    "DueDate" : new Date("2023-09-16"),
+    "ReturnDate" : new Date("2023-09-14"),
+    "ReturnedOnTime" : "Yes",
+    "FinePaid" : null
+}
+
+Loan3 = {
+    "LoanName" : "MongoDBAug2023",
+    "EmailAddress" : "abc@alphabet.com",
+    "BookName" : "MongoDB for Beginners",
+    "LoanDate" : new Date("2023-08-01"),
+    "DueDate" : new Date("2023-08-15"),
+    "ReturnDate" : new Date("2023-08-22"),
+    "ReturnedOnTime" : "No",
+    "FinePaid" : "Yes"
+}
+
+Loan4 = {
+    "LoanName" : "MongoDBOct2023",
+    "EmailAddress" : "s4100701@glos.ac.uk",
+    "BookName" : "MongoDB for Beginners",
+    "LoanDate" : new Date("2023-10-01"),
+    "DueDate" : new Date("2023-10-15"),
+    "ReturnDate" : new Date("2023-10-31"),
+    "ReturnedOnTime" : "No",
+    "FinePaid" : "Yes"
+}
+
+Loan5 = {
+    "LoanName" : "HarryPotterSep2023",
+    "EmailAddress" : "s4100701@glos.ac.uk",
+    "BookName" : "Harry Potter and the Chamber of Secrets",
+    "LoanDate" : new Date("2023-09-12"),
+    "DueDate" : new Date("2023-09-26"),
+    "ReturnDate" : new Date("2023-09-22"),
+    "ReturnedOnTime" : "Yes",
+    "FinePaid" : null
+}
+
+Loan6 = {
+    "LoanName" : "MacbethSep2023",
+    "EmailAddress" : "user@example.com",
+    "BookName" : "Macbeth",
+    "LoanDate" : new Date("2023-09-05"),
+    "DueDate" : new Date("2023-09-19"),
+    "ReturnDate" : new Date("2023-09-17"),
+    "ReturnedOnTime" : "Yes",
+    "FinePaid" : null
+}
+
+Loan7 = {
+    "LoanName" : "MongoDBMay2023",
+    "EmailAddress" : "user@example.com",
+    "BookName" : "MongoDB for Beginners",
+    "LoanDate" : new Date("2023-05-04"),
+    "DueDate" : new Date("2023-05-18"),
+    "ReturnDate" : new Date("2023-05-24"),
+    "ReturnedOnTime" : "No",
+    "FinePaid" : "Yes"
+}
+
+//Inserting sample loans into LoansCollection
+db.LoansCollection.insertOne(Loan1);
+db.LoansCollection.insertOne(Loan2);
+db.LoansCollection.insertOne(Loan3);
+db.LoansCollection.insertOne(Loan4);
+db.LoansCollection.insertOne(Loan5);
+db.LoansCollection.insertOne(Loan6);
+db.LoansCollection.insertOne(Loan7);
+
+//Declaring sample fines
+Fine1 = {
+    "LoanName" : "TheoryOfEverythingAug2023",
+    "EmailAddress" : "abc@alphabet.com",
+    "FineDate" : new Date("2023-08-29"),
+    "FineAmount" : 50
+}
+
+Fine2 = {
+    "LoanName" : "MongoDBAug2023",
+    "EmailAddress" : "abc@alphabet.com",
+    "FineDate" : new Date("2023-08-22"),
+    "FineAmount" : 50
+}
+
+Fine3 = {
+    "LoanName" : "MongoDBOct2023",
+    "EmailAddress" : "s4100701@glos.ac.uk",
+    "FineDate" : new Date("2023-10-31"),
+    "FineAmount" : 50
+}
+
+Fine4 = {
+    "LoanName" : "MongoDBMay2023",
+    "EmailAddress" : "user@example.com",
+    "FineDate" : new Date("2023-05-24"),
+    "FineAmount" : 50
+}
+
+//Inserting sample fines into FinesCollection
+db.FinesCollection.insertOne(Fine1);
+db.FinesCollection.insertOne(Fine2);
+db.FinesCollection.insertOne(Fine3);
+db.FinesCollection.insertOne(Fine4);
+
+//Finding all documents in each collection
+Cursor1 = db.BooksCollection.find();
+Cursor1.forEach(printjson);
+
+Cursor2 = db.StudentsCollection.find();
+Cursor2.forEach(printjson);
+
+Cursor3 = db.LoansCollection.find();
+Cursor3.forEach(printjson);
+
+Cursor4 = db.FinesCollection.find();
+Cursor4.forEach(printjson);
